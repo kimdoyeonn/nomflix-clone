@@ -25,7 +25,6 @@ const Home = () => {
 
   const { data: popularMovies, isLoading: isPopularMoviesLoading } =
     useQuery<IGetContentsResult>(['movies', 'popularMovies'], getPopularMovies);
-  console.log(topRatedMovies);
   return (
     <Container>
       {isTopRatedMoviesLoading ||

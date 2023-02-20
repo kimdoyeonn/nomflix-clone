@@ -1,12 +1,6 @@
 import { AnimatePresence, motion, useScroll } from 'framer-motion';
-import { useState } from 'react';
 import { useQuery } from 'react-query';
-import {
-  useLocation,
-  useMatch,
-  useNavigate,
-  useParams,
-} from 'react-router-dom';
+import { useMatch, useNavigate, useParams } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
 import { getMovie, getTv, IDetailContent } from '../api';
@@ -18,7 +12,6 @@ const ContentModal = () => {
   const params = useParams();
   const { scrollY } = useScroll();
   const [contentModal, setContentModal] = useRecoilState(contentModalState);
-  const [detailContent, setDetailContent] = useState<any>();
   const isTv = useMatch('/tv/:tvId');
   const { data: detailData, isLoading: isDetailLoading } =
     useQuery<IDetailContent>(
@@ -28,7 +21,6 @@ const ContentModal = () => {
           ? getTv(params.queryKey[2] as number)
           : getMovie(params.queryKey[2] as number)
     );
-  console.log('detail', detailData);
   const onOverlayClick = () => {
     setContentModal(null);
     if (isTv) {

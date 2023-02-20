@@ -1,10 +1,9 @@
-import { AnimatePresence, motion, useScroll } from 'framer-motion';
+import { AnimatePresence, motion } from 'framer-motion';
 import { useState } from 'react';
-import { useQuery } from 'react-query';
-import { useMatch, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useRecoilState } from 'recoil';
 import styled from 'styled-components';
-import { getNowPlayingMovies, IGetContentsResult } from '../api';
+import { IGetContentsResult } from '../api';
 import { contentModalState } from '../atoms';
 import { makeImagePath } from '../utils';
 
@@ -89,7 +88,6 @@ const ContentRow = ({
   title: string;
   type: 'movie' | 'tv';
 }) => {
-  console.log(data);
   const [back, setBack] = useState(false);
   const [index, setIndex] = useState(0);
   const [leaving, setLeaving] = useState(false);
@@ -107,7 +105,6 @@ const ContentRow = ({
     }
   };
   const decreaseIndex = async () => {
-    console.log(index);
     if (data) {
       if (leaving) return;
       toggleLeaving();
@@ -115,7 +112,6 @@ const ContentRow = ({
       const totalMovies = data.results.length - 1;
       const maxIndex = Math.floor(totalMovies / offset) - 1;
       setIndex((prev) => {
-        console.log(prev, maxIndex);
         return prev === 0 ? maxIndex : prev - 1;
       });
     }
